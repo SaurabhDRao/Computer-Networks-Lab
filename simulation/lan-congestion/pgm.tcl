@@ -73,7 +73,7 @@ set ftp2 [new Application/FTP]
 $ftp2 attach-agent $tcp2
 
 $tcp2 set fid_ 2
-$tcp1 set packetsize_ 55
+$tcp2 set packetsize_ 55
 
 set tfile2 [open cwnd2.tr w]
 $tcp2 attach $tfile2
