@@ -49,7 +49,10 @@ void displayRouteTable(int src){
 	printf("\n\nRouting table for %c: ", ('A' + src));
 	printf("\nDestination\tCost\tVia");
 	for(int i=0;i<n;i++){
-		printf("\n%c\t\t%d\t%c", ('A' + i), (rt[src][i].cost), ('A' + rt[src][i].via));
+		if(rt[src][i].cost == inf)
+			printf("\n%c\t\t%d\t-", ('A' + i), (rt[src][i].cost));
+		else
+			printf("\n%c\t\t%d\t%c", ('A' + i), (rt[src][i].cost), ('A' + rt[src][i].via));
 	}
 }
 
@@ -80,9 +83,13 @@ void main(){
 		if(src > (n - 1) || dest > (n - 1))
 			printf("Router doesn't exist!");
 		else {
-			printf("Shortest path: ");
-			findPath(src, dest);
-			printf("\nTotal cost: %d\n", rt[src][dest].cost);
+			if(rt[src][dest].cost == inf)
+				printf("No path exists!\n");
+			else{
+				printf("Shortest path: ");
+				findPath(src, dest);
+				printf("\nTotal cost: %d\n", rt[src][dest].cost);	
+			}
 		}
 		printf("\nDo you want to continue? (0-No 1-Yes): ");
 		scanf("%d", &ch);
